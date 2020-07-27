@@ -1,0 +1,359 @@
+@import 'variables';
+@import 'grid';
+@import 'map';
+
+//
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-family: $primaryFont;
+}
+
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    background-color: $primaryColor;
+}
+
+//
+
+.mapboxgl-ctrl-top-left {
+  display: none;
+}
+
+.form-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items:    center;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 300;
+    margin: 15px 0;
+    color: white;
+}
+
+#showRoute {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border: 0;
+  box-shadow: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.input-container {
+    width: 50%;
+    position: relative;
+}
+
+.input-arrow {
+    position: absolute;
+    max-height: 100%;
+
+    right: 0;
+    padding: 2% 5%;
+
+    cursor: pointer;
+}
+
+.final-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  & .final-inner {
+    margin: 10px;
+
+    &:not(:last-child) {
+      flex: 1;
+    }
+
+    & #map {
+      border-radius: 5px;
+    }
+  }
+}
+
+#destination, #dates {
+    & .input-container {
+        display: flex;
+
+        & p {
+            text-align: center;
+            margin: 3px 10px 0 0;
+        }
+
+        & > *:first-child {
+            margin-right: 10px;
+        }
+    }
+}
+
+#groupSize {
+    .input-container {
+        display: flex;
+    }
+}
+
+#splitCost {
+  .input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    :not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}
+
+.unselectable {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.total-cost {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+button {
+    padding: 2% 5%;
+    border: 0;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: $defaultTiming;
+
+    &:hover {
+      transition: $defaultTiming;
+      box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+    }
+}
+
+.button-container {
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-container:last-child {
+  margin-right: 20px;
+}
+
+.content-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    & p {
+        color: $primaryColor;
+        font-size: 16px;
+
+        & .price {
+            font-size: 20px;
+        }
+
+        & .price-small {
+            font-size: 12px;
+        }
+    }
+}
+
+.vehicle-select-inner {
+    display: flex;
+    flex-direction: row;
+
+    & .vehicle-container:not(:last-child) {
+        margin-right: 20px;
+    }
+
+    & .vehicle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        // background-color: transparent;
+        background: linear-gradient(to left, transparent 50%,  white 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+
+        border-radius: 10px;
+        padding: 20px;
+
+        transition: all $defaultTiming;
+
+        cursor: pointer;
+
+        & * {
+            pointer-events: none;
+        }
+
+        &:hover {
+            background-position: left bottom;
+            transition: all $defaultTiming;
+
+            // background-color: white;
+            box-shadow: 10px 10px 60px -35px rgba(0,0,0,0.75);
+
+            & > .vehicle-inner {
+                background-position: left bottom;
+                transition: ease 0.25s;
+            }
+
+            & .vehicle-inner .content-inner p {
+                color: white;
+                transition: all $defaultTiming;
+            }
+
+            & h3 {
+                color: $primaryColor;
+                transition: all $defaultTiming;
+            }
+
+        }
+
+        & img {
+            width: 80%;
+        }
+
+        & h3 {
+            font-weight: 300;
+            font-size: 24px;
+            color: white;
+        }
+
+        & .vehicle-inner {
+            background: linear-gradient(to left, white 50%,  $primaryColor 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+
+            transition: ease 0.25s;
+
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+
+            & .content-inner {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                & p {
+                    color: $primaryColor;
+                    font-size: 16px;
+
+                    & .price {
+                        font-size: 20px;
+                    }
+
+                    & .price-small {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: content-box;
+    cursor: pointer;
+
+    background-color: white;
+
+    min-height: 100%;
+
+    padding: 2% 5%;
+    margin-left: 10px;
+    & .input-arrow {
+        position: static;
+        height: 1em;
+    }
+}
+
+input {
+    &[type=text], &[type=date], &[type=number] {
+        width: 100%;
+
+        background-color: #ffffff;
+        color: $darkColour;
+
+        font-size: 20px;
+        padding: 8px 25px;
+
+        border: none;
+        outline: none;
+
+        &::placeholder {
+            color: $primaryColor;
+            opacity: 1;
+        }
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+    animation: show 1s;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+        transform: translateX(30em);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0em);
+    }
+}
+
+
+.input-error {
+  background-color: #383838 !important;
+  color: white !important;
+  animation: error-shake 0.2s;
+}
+
+@keyframes error-shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2%);
+  }
+  60% {
+    transform: translateX(2%);
+  }
+  80% {
+    transform: translateX(-2%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

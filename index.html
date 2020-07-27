@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Transport Web App</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <!-- <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.2/mapbox-gl.css' rel='stylesheet' /> -->
+        <link href='node_modules/mapbox-gl/dist/mapbox-gl.css' rel='stylesheet' />
+        <script src='node_modules/mapbox-gl/dist/mapbox-gl.js'></script>
+        <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="node_modules/toastr/build/toastr.css" rel="stylesheet"/>
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/toastr/toastr.js"></script>
+    </head>
+    <body>
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.1.1/mapbox-gl-directions.css' type='text/css' />
+
+    <section class="form-container">
+        <div class="row col-1">
+
+            <!-- Name -->
+            <div id="name" class="col show">
+                <h2>What is your name?</h2>
+                <div class="input-container">
+                    <img id="nameArrow" class="input-arrow" src="img/arrow.svg" alt="Arrow Icon">
+                    <input id="nameInput" type="text" name="name" placeholder="e.g. Jared <3">
+                </div>
+            </div>
+
+            <!-- Destination -->
+            <div id="destination" class="col hide">
+                <h2>Where are you going, <span class="nameFirst"></span>?</h2>
+                <div class="input-container">
+                    <input id="locationInput" type="text" name="destination" placeholder="e.g. Wellington">
+                    <p>to</p>
+                    <input id="destinationInput" type="text" name="destination" placeholder="e.g. Auckland">
+                    <div id="destinationArrow" class="arrow-container">
+                        <img class="input-arrow" src="img/arrow.svg" alt="Arrow Icon">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dates -->
+            <div id="dates" class="col hide">
+                <h2>Between which dates?</h2>
+                <div class="input-container">
+                    <input id="datesInputStart" type="date" name="dates">
+                    <p>to</p>
+                    <input id="datesInputEnd" type="date" name="dates">
+                    <div id="datesArrow" class="arrow-container">
+                        <img class="input-arrow" src="img/arrow.svg" alt="Arrow Icon">
+                    </div>
+                </div>
+            </div>
+
+            <!-- No.# of people -->
+            <div id="groupSize" class="col hide">
+                <h2>How many people are going on your trip?</h2>
+                <div class="input-container">
+                    <input id="groupSizeInput" type="number" name="groupSize" placeholder="e.g. 4">
+                    <div id="groupSizeArrow" class="arrow-container">
+                        <img class="input-arrow" src="img/arrow.svg" alt="Arrow Icon">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle Select -->
+            <div id="vehicleSelect" class="col hide">
+                <h2>Pick a vehicle</h2>
+
+                <div class="vehicle-select-inner">
+                    <div id="motorbike" class="vehicle-container">
+                        <img src="img/motorbike.png" alt="Motorbike">
+                        <h3>Motorbike</h3>
+                        <div class="vehicle-inner">
+                            <div class="content-inner">
+                                <p>Cost per day:</p>
+                                <p><span class="price">$109</span><span class="price-small">/day</span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p>Estimated fuel cost:</p>
+                                <p><span class="price">$0</span><span class="price-small">/100km</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Small Car -->
+                    <div id="smallCar" class="vehicle-container">
+                        <img src="img/small-car.png" alt="Small Car">
+                        <h3>Small Car</h3>
+                        <div class="vehicle-inner">
+                            <div class="content-inner">
+                                <p>Cost per day:</p>
+                                <p><span class="price">$129</span><span class="price-small">/day</span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p>Estimated fuel cost:</p>
+                                <p><span class="price">$0</span><span class="price-small">/100km</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Large Car -->
+                    <div id="largeCar" class="vehicle-container">
+                        <img src="img/large-car.png" alt="Large Car">
+                        <h3>Large Car</h3>
+                        <div class="vehicle-inner">
+                            <div class="content-inner">
+                                <p>Cost per day:</p>
+                                <p><span class="price">$144</span><span class="price-small">/day</span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p>Estimated fuel cost:</p>
+                                <p><span class="price">$0</span><span class="price-small">/100km</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Motorhome -->
+                    <div id="motorhome" class="vehicle-container">
+                        <img src="img/motorhome.png" alt="Motorhome">
+                        <h3>Motorhome</h3>
+                        <div class="vehicle-inner">
+                            <div class="content-inner">
+                                <p>Cost per day:</p>
+                                <p><span class="price">$200</span><span class="price-small">/day</span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p>Estimated fuel cost:</p>
+                                <p><span class="price">$0</span><span class="price-small">/100km</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Split Cost -->
+            <div id="splitCost" class="col hide">
+                <h2>Do you want to split the total cost with your group?</h2>
+                <div class="input-container">
+                    <button id="splitCostYes" type="button" name="button">Yes</button>
+                    <button id="splitCostNo" type="button" name="button">No</button>
+                </div>
+            </div>
+
+            <!-- Final Screen -->
+            <div id="finalScreen" class="col hide">
+                <h2>Enjoy your trip, <span class="nameSecond"></span>!</h2>
+                <div class="final-container">
+                    <div class="final-inner">
+                        <div class="total-cost">
+                            <h3>Here is your total cost!</h3>
+                            <div class="content-inner">
+                                <p>Cost of <span id="chosenVehicle"></span>:</p>
+                                <p>$<span id="chosenVehiclePrice" class="price"></span><span class="price-small">/day</span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p><span id="daysOfRental"></span> day rental:</p>
+                                <p>$<span id="vehicleCostTotal" class="price"></span><span class="price-small">.00</span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p>Estimated fuel cost:</p>
+                                <p>$<span id="fuelCost" class="price"></span><span class="price-small"></span></p>
+                            </div>
+                            <div class="content-inner">
+                                <p class="total">Total:</p>
+                                <p>$<span id="totalCost"></span></p>
+                            </div>
+                            <div id="splitCostContainer" class="content-inner">
+                                <p class="total">Total per person:</p>
+                                <p class="price">$<span id="splitCostTotal"></span></p>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button id="showRoute" type="button" name="button"></button>
+                            <button id="calcAgain" type="button" name="button">Calculate again</button>
+                            <button type="button" name="button">Book now!</button>
+                        </div>
+                    </div>
+                    <div id="mapContainer" class="map_box_container final-inner">
+                      <div id="map" style="min-height: 100%; min-width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="js/script.js"></script>
+    </body>
+
+</html>

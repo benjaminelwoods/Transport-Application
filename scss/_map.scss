@@ -1,0 +1,30 @@
+body {
+  margin:0;
+  padding:0;
+}
+
+.map_box_container {
+  position: relative;
+  width: 400px !important;
+}
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#aa, #bb {
+  display: block;
+  height: 2.5em;
+  margin: 2em;
+  width: 16em;
+  border-radius: 0.4em;
+}
+
+p {
+  margin: 0.5em 0 0 0.8em;
+  color: #fff;
+  font-size: 1.6em;
+}
